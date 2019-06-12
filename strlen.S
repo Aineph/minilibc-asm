@@ -2,27 +2,28 @@
 
 section .text
 
-global _strlen
-
 ;;; Computes the length of a given string.
 ;;; @param rdi: The string to process.
 ;;; @return rax: The length of the string.
 
+global strlen
+
 	;; Initializes the function.
-_strlen:
+strlen:
 	push rbp
 	mov rbp, rsp
-	mov rax, 0
+	xor rcx, rcx
 
 	;; Loops over the string. Stores the index in rax.
 _strlen_loop:
-	cmp byte [rdi + rax], 0
+	cmp byte [rdi + rcx], 0
 	je _strlen_end
-	inc rax
+	inc rcx
 	jmp _strlen_loop
 
 	;; Ends the function.
 _strlen_end:
+	mov rax, rcx
 	mov rsp, rbp
 	pop rbp
 	ret

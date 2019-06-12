@@ -2,8 +2,6 @@
 
 section .text
 
-global _memmove
-
 ;;; Copies a given number of bytes from an array to an other array.
 ;;; If some elements in the two arrays have the same addresses, they are not overwritten.
 ;;; @param rdi: The array to fill.
@@ -11,29 +9,31 @@ global _memmove
 ;;; @param rdx: The number of bytes to fill.
 ;;; @return rax: The address of the filled array.
 
+global memmove
+
 	;; Initializes the function.
-_memmove:
+memmove:
 	push rbp
 	mov rbp, rsp
+	xor rcx, rcx
 	sub rsp, rdx
-	mov rax, 0
 
 	;; Saves the content of the source array on the space allocated on the stack.
 _memmove_save:
-	cmp rax, rdx
+	cmp rcx, rdx
 	jge _memmove_fill
-	mov r10b, [rsi + rax]
-	mov [rsp + rax], r10b
-	inc rax
+	mov r10b, [rsi + rcx]
+	mov [rsp + rcx], r10b
+	inc rcx
 	jmp _memmove_save
 
 	;; Fills the array with the values saved on the stack.
 _memmove_fill:
-	dec rax
-	cmp rax, 0
+	dec rcx
+	cmp rcx, 0
 	jl _memmove_end
-	mov r10b, [rsp + rax]
-	mov [rdi + rax], r10b
+	mov r10b, [rsp + rcx]
+	mov [rdi + rcx], r10b
 	jmp _memmove_fill
 
 	;; Ends the function.

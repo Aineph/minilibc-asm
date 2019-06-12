@@ -2,27 +2,27 @@
 
 section .text
 
-global _memcpy
-
 ;;; Copies a given number of bytes from an array to an other array.
 ;;; @param rdi: The array to fill.
 ;;; @param rsi: The source array.
 ;;; @param rdx: The number of bytes to fill.
 ;;; @param rax: The address of the filled array.
 
+global memcpy
+
 	;; Initializes the function.
-_memcpy:
+memcpy:
 	push rbp
 	mov rbp, rsp
-	mov rax, 0
+	xor rcx, rcx
 
 	;; Fills the array with the values of the other.
 _memcpy_fill:
-	cmp rax, rdx
+	cmp rcx, rdx
 	jge _memcpy_end
-	mov r10b, [rsi + rax]
-	mov [rdi + rax], r10b
-	inc rax
+	mov r10b, [rsi + rcx]
+	mov [rdi + rcx], r10b
+	inc rcx
 	jmp _memcpy_fill
 
 	;; Ends the function.

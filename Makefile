@@ -1,16 +1,16 @@
 CC		= gcc
 
-NASM		= nasm -f
+NASM		= nasm
 
 RM		= rm -f
-
-PLATFORM	= macho64
 
 CFLAGS		+= -W -Wall -Werror -Wextra
 
 CFLAGS		+= -ansi -pedantic
 
 LDFLAGS		= -shared -fPIC
+
+ASMFLAGS	= -f macho64 --prefix _
 
 NAME		= libmlc.so
 
@@ -21,14 +21,18 @@ SRCS		= strlen.S	\
 		  strcmp.S	\
 		  memmove.S	\
 		  strncmp.S	\
-		  strcasecmp.S
+		  strcasecmp.S	\
+		  rindex.S	\
+		  strstr.S	\
+		  strpbrk.S	\
+		  strcspn.S
 
 OBJS		= $(SRCS:.S=.o)
 
 all:		$(NAME)
 
 %.o:		%.S
-		$(NASM) $(PLATFORM) $<
+		$(NASM) $(ASMFLAGS) $<
 
 $(NAME):	$(OBJS)
 		$(CC) $(OBJS) -o $(NAME) $(LDFLAGS)

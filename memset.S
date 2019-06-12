@@ -2,26 +2,26 @@
 
 section .text
 
-global _memset
-
 ;;; Sets a given number of bytes in an array to a given value.
 ;;; @param rdi: The array to fill.
 ;;; @param rsi: The value to store in the array.
 ;;; @param rdx: The number of bytes to fill.
 ;;; @return rax: The address of the filled array.
 
+global memset
+
 	;; Initializes the function.
-_memset:
+memset:
 	push rbp
 	mov rbp, rsp
-	mov rax, 0
+	xor rcx, rcx
 
 	;; Fills the array with the given value.
 _memset_fill:
-	cmp rax, rdx
+	cmp rcx, rdx
 	jge _memset_end
-	mov [rdi + rax], sil
-	inc rax
+	mov [rdi + rcx], sil
+	inc rcx
 	jmp _memset_fill
 
 	;; Ends the function.

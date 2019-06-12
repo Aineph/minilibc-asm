@@ -8,6 +8,10 @@ extern int strcmp(char *, char *);
 extern void *memmove(void *, void *, int);
 extern int strncmp(char *, char *, int);
 extern int strcasecmp(char *, char *);
+extern char *rindex(char *, int);
+extern char *strstr(char *, char *);
+extern char *strpbrk(char *, char *);
+extern int strcspn(char *, char *);
 
 int main()
 {
@@ -27,5 +31,10 @@ int main()
   printf("%d\n", strncmp(str, "Salut Monde", 3));
   printf("%d\n", strcasecmp(str, "SAlSaLuT Me"));
   printf("%d\n", strcasecmp(str, "SAlSaLit Me"));
+  printf("%s\n", rindex(str, 'l'));
+  printf("%s\n", strstr(str, "Salut N"));
+  printf("%s\n", strstr(str, "ut M"));
+  printf("%s\n", strpbrk(str, "uma"));
+  printf("%d\n", strcspn(str, "me "));
   return 0;
 }

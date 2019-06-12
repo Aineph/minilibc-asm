@@ -2,34 +2,34 @@
 
 section .text
 
-global _strcasecmp
-
 ;;; Compares the content of two given strings without case sensitivity.
 ;;; @param rdi: The first string to compare.
 ;;; @param rsi: The second string to compare.
 ;;; @return rax: The difference between the first and the second string.
 
+global strcasecmp
+
 	;; Initializes the function.
-_strcasecmp:
+strcasecmp:
 	push rbp
 	mov rbp, rsp
-	mov rax, 0
+	xor rcx, rcx
 
 	;; Checks the content of the strings.
 _strcasecmp_check:
-	mov r10b, [rdi + rax]
-	mov r11b, [rsi + rax]
-	mov r12b, 0
-	cmp r10b, r11b
-	jne _strcasecmp_check_case
-
-	;; Continues the treatment.
-_strcasecmp_continue:
+	mov r10b, [rdi + rcx]
+	mov r11b, [rsi + rcx]
+	xor r12b, r12b
 	cmp r10b, 0
 	je _strcasecmp_end
 	cmp r11b, 0
 	je _strcasecmp_end
-	inc rax
+	cmp r10b, r11b
+	jne _strcasecmp_check_case
+
+	;; Increments the index and checks again.
+_strcasecmp_continue:
+	inc rcx
 	jmp _strcasecmp_check
 
 	;; Checks if the two characters have different cases.
