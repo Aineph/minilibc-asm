@@ -1,23 +1,16 @@
-#include <stdio.h>
+/*
+ * Created by Nicolas Fez for minilibc-asm.
+ * Started on 10/06/2019.
+ */
 
-extern int strlen(char *);
-extern char *strchr(char *, int);
-extern void *memset(void *, int, int);
-extern void *memcpy(void *, void *, int);
-extern int strcmp(char *, char *);
-extern void *memmove(void *, void *, int);
-extern int strncmp(char *, char *, int);
-extern int strcasecmp(char *, char *);
-extern char *rindex(char *, int);
-extern char *strstr(char *, char *);
-extern char *strpbrk(char *, char *);
-extern int strcspn(char *, char *);
+#include <stdio.h>
+#include <string.h>
 
 int main()
 {
   char str[] = "Hello World";
 
-  printf("%lu\n", strlen(str));
+  printf("%ld\n", strlen(str));
   printf("%s\n", strchr(str, 'W'));
   memset(str, '0', 5);
   printf("%s\n", str);
@@ -32,9 +25,8 @@ int main()
   printf("%d\n", strcasecmp(str, "SAlSaLuT Me"));
   printf("%d\n", strcasecmp(str, "SAlSaLit Me"));
   printf("%s\n", rindex(str, 'l'));
-  printf("%s\n", strstr(str, "Salut N"));
   printf("%s\n", strstr(str, "ut M"));
   printf("%s\n", strpbrk(str, "uma"));
-  printf("%d\n", strcspn(str, "me "));
+  printf("%ld\n", strcspn(str, "me "));
   return 0;
 }

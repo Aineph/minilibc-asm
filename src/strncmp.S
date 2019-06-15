@@ -1,3 +1,8 @@
+;;;
+;;; Created by Nicolas Fez for minilibc-asm.
+;;; Started on 10/06/2019.
+;;;
+
 [BITS 64]
 
 section .text
@@ -24,12 +29,10 @@ _strncmp_check:
 	jge _strncmp_end
 	mov r10b, [rdi + rcx]
 	mov r11b, [rsi + rcx]
-	cmp byte r10b, 0
-	je _strncmp_end
-	cmp byte r11b, 0
-	je _strncmp_end
 	cmp r10b, r11b
 	jne _strncmp_end
+	cmp byte r10b, 0
+	je _strncmp_end
 	inc rcx
 	jmp _strncmp_check
 

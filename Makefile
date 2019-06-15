@@ -1,3 +1,8 @@
+#
+# Created by Nicolas Fez for minilibc-asm.
+# Started on 10/06/2019.
+#
+
 CC		= gcc
 
 NASM		= nasm
@@ -10,22 +15,22 @@ CFLAGS		+= -ansi -pedantic
 
 LDFLAGS		= -shared -fPIC
 
-ASMFLAGS	= -f macho64 --prefix _
+ASMFLAGS	= -f elf64
 
 NAME		= libmlc.so
 
-SRCS		= strlen.S	\
-		  strchr.S	\
-		  memset.S	\
-		  memcpy.S	\
-		  strcmp.S	\
-		  memmove.S	\
-		  strncmp.S	\
-		  strcasecmp.S	\
-		  rindex.S	\
-		  strstr.S	\
-		  strpbrk.S	\
-		  strcspn.S
+SRCS		= src/strlen.S		\
+		  src/strchr.S		\
+		  src/memset.S		\
+		  src/memcpy.S		\
+		  src/strcmp.S		\
+		  src/memmove.S		\
+		  src/strncmp.S		\
+		  src/strcasecmp.S	\
+		  src/rindex.S		\
+		  src/strstr.S		\
+		  src/strpbrk.S		\
+		  src/strcspn.S
 
 OBJS		= $(SRCS:.S=.o)
 

@@ -1,3 +1,8 @@
+;;;
+;;; Created by Nicolas Fez for minilibc-asm.
+;;; Started on 10/06/2019.
+;;;
+
 [BITS 64]
 
 section .text
@@ -12,18 +17,17 @@ global strlen
 strlen:
 	push rbp
 	mov rbp, rsp
-	xor rcx, rcx
+	xor rax, rax
 
 	;; Loops over the string. Stores the index in rax.
 _strlen_loop:
-	cmp byte [rdi + rcx], 0
+	cmp byte [rdi + rax], 0
 	je _strlen_end
-	inc rcx
+	inc rax
 	jmp _strlen_loop
 
 	;; Ends the function.
 _strlen_end:
-	mov rax, rcx
 	mov rsp, rbp
 	pop rbp
 	ret

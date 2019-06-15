@@ -1,3 +1,8 @@
+;;;
+;;; Created by Nicolas Fez for minilibc-asm.
+;;; Started on 12/06/2019.
+;;;
+
 [BITS 64]
 
 section .text

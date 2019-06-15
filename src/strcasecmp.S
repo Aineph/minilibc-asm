@@ -1,3 +1,8 @@
+;;;
+;;; Created by Nicolas Fez for minilibc-asm.
+;;; Started on 10/06/2019.
+;;;
+
 [BITS 64]
 
 section .text
@@ -20,12 +25,10 @@ _strcasecmp_check:
 	mov r10b, [rdi + rcx]
 	mov r11b, [rsi + rcx]
 	xor r12b, r12b
-	cmp r10b, 0
-	je _strcasecmp_end
-	cmp r11b, 0
-	je _strcasecmp_end
 	cmp r10b, r11b
 	jne _strcasecmp_check_case
+	cmp r10b, 0
+	je _strcasecmp_end
 
 	;; Increments the index and checks again.
 _strcasecmp_continue:

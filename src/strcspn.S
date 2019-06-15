@@ -1,3 +1,8 @@
+;;;
+;;; Created by Nicolas Fez for minilibc-asm.
+;;; Started on 12/06/2019.
+;;;
+
 [BITS 64]
 
 section .text
@@ -13,36 +18,34 @@ global strcspn
 strcspn:
 	push rbp
 	mov rbp, rsp
-	xor rcx, rcx
 	xor rax, rax
 
 	;; Searches the characters within the string.
 _strcspn_search:
-	mov r10b, [rdi + rcx]
-	push rcx
+	mov r10b, [rdi + rax]
+	push rax
 	cmp r10b, 0
 	je _strcspn_end
-	xor rcx, rcx
+	xor rax, rax
 
 	;; Checks every character within the second string.
 _strcspn_check:
-	cmp byte [rsi + rcx], 0
+	cmp byte [rsi + rax], 0
 	je _strcspn_continue
-	cmp [rsi + rcx], r10b
+	cmp [rsi + rax], r10b
 	je _strcspn_end
-	inc rcx
+	inc rax
 	jmp _strcspn_check
 
 	;; Increments the index and searches again.
 _strcspn_continue:
-	pop rcx
-	inc rcx
+	pop rax
+	inc rax
 	jmp _strcspn_search
 
 	;; Ends the function.
 _strcspn_end:
-	pop rcx
-	mov rax, rcx
+	pop rax
 	mov rsp, rbp
 	pop rbp
 	ret
