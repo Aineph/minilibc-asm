@@ -3,10 +3,10 @@
  * Started on 10/06/2019.
  */
 
-#define _GNU_SOURCE
-
 #include <stdio.h>
 #include <string.h>
+
+extern void *memrchr(void *, int, int);
 
 int main()
 {
