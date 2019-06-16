@@ -11,7 +11,7 @@ section .text
 ;;; @param rdi: The array to fill.
 ;;; @param rsi: The source array.
 ;;; @param rdx: The number of bytes to fill.
-;;; @param rax: The address of the filled array.
+;;; @return rax: The address of the filled array.
 
 global memcpy
 
@@ -21,7 +21,7 @@ memcpy:
 	mov rbp, rsp
 	xor rcx, rcx
 
-	;; Fills the array with the values of the other.
+	;; Fills the array with the content of the other.
 _memcpy_fill:
 	cmp rcx, rdx
 	jge _memcpy_end

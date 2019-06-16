@@ -15,36 +15,67 @@ The following functions are implemented:
 * strstr
 * strpbrk
 * strcspn
+* strcpy
+* strncpy
+* strcat
+* strncat
 
 ## Build system
 
 The project uses a Makefile in order to compile a shared library.
+You need the assembly compiler *nasm* and the GNU Compiler collection *gcc*.
 
-This section will guide you on how to build the shared library on a Linux environment and to test it.
-After cloning the repository, run the following command to create to generate the library.
+This section will guide you on how to build the shared library on a Linux environment (including Mac OS X) and to
+test it.
+After cloning the repository, run the following command at the root of the directory to generate the library.
 
 ```
 $> make
 ```
 
-Now a file named libmlc.so should have been generated at the root of the repository.
-In order to test it, a file named "test.c" is available in the "test" subdirectory.
+On a Linux system, the created library should be named "libmlc.so". On OS X, it should be named "libmlc.dylib".
 
-To compile it from the root directory, simply run the command:
+Now that the library has been built, the *LD_PRELOAD* variable has to be overridden. On Mac OS X, the variables to
+override are named *DYLD_INSERT_LIBRARIES* and *DYLD_FORCE_FLAT_NAMESPACE*.
 
-```
-$> gcc -o minilibc-asm_test test/test.c
-```
-
-This will generate a binary executable named "minilibc-asm_test".
-Finally, in order to call the functions implemented in the generated shared library instead of the
-standard C library functions, the "LD_PRELOAD" variable must be overridden before executing the binary.
-
-To do so, run the following commands:
+To redefine the variable with the generated library on Linux, use the following command:
 
 ```
 $> export LD_PRELOAD=./libmlc.so
+```
+
+On OS X, use these commands instead:
+
+```
+$> export DYLD_INSERT_LIBRARIES=./libmlc.dylib
+$> export DYLD_FORCE_FLAT_NAMESPACE=1
+```
+
+Now every command typed in the terminal are linked to the library.
+
+In order to test the implemented functions, a file named "test.c" is available in the "test" subdirectory.
+To compile it, simply run the command:
+
+```
+$> gcc -o minilibc-asm_test test/test.c -fno-builtin -L. -lmlc
+```
+
+This will generate a binary executable named "minilibc-asm_test".
+To specify the path of the library to the binary, the "LD_LIBRARY_PATH" must be overridden on Linux. On OS X, this
+variable is named "DYLD_LIBRARY_PATH".
+
+On Linux type the following commands:
+
+```
+$> export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
 $> ./minilibc-asm_test
 ```
 
-The binary file has been executed using the libmlc.so library.
+On Max OS X, it will look like below:
+
+```
+$> export DYLD_LIBRARY_PATH=.:$DYLD_LIBRARY_PATH
+$> ./minilibc-asm_test
+```
+
+The binary file has been executed using the shared library instead of the C standard library.

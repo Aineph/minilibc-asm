@@ -15,9 +15,31 @@ CFLAGS		+= -ansi -pedantic
 
 LDFLAGS		= -shared -fPIC
 
+#
+# Cross-Platforms differences
+#
+
+# OS X Support
+
+ifeq ($(shell uname -s), Darwin)
+
+ASMFLAGS	= -f macho64 --prefix _
+
+NAME		= libmlc.dylib
+
+# Unix Support
+
+else
+
 ASMFLAGS	= -f elf64
 
 NAME		= libmlc.so
+
+endif
+
+#
+# End of Cross-Platforms differences
+#
 
 SRCS		= src/strlen.S		\
 		  src/strchr.S		\
@@ -30,7 +52,11 @@ SRCS		= src/strlen.S		\
 		  src/rindex.S		\
 		  src/strstr.S		\
 		  src/strpbrk.S		\
-		  src/strcspn.S
+		  src/strcspn.S		\
+		  src/strcpy.S		\
+		  src/strncpy.S		\
+		  src/strcat.S		\
+		  src/strncat.S
 
 OBJS		= $(SRCS:.S=.o)
 

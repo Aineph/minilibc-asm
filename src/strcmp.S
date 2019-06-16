@@ -29,6 +29,7 @@ _strcmp_check:
 	cmp byte r10b, 0
 	je _strcmp_end
 	inc rcx
+	jmp _strcmp_check
 
 	;; Ends the function.
 _strcmp_end:
