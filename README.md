@@ -54,27 +54,18 @@ $> export DYLD_FORCE_FLAT_NAMESPACE=1
 Now every command typed in the terminal are linked to the library.
 
 In order to test the implemented functions, a file named "test.c" is available in the "test" subdirectory.
-To compile it, simply run the command:
+To compile it on a linux environment, simply run the command:
 
 ```
 $> gcc -o minilibc-asm_test test/test.c -fno-builtin -L. -lmlc
 ```
 
 This will generate a binary executable named "minilibc-asm_test".
-To specify the path of the library to the binary, the "LD_LIBRARY_PATH" must be overridden on Linux. On OS X, this
-variable is named "DYLD_LIBRARY_PATH".
-
-On Linux type the following commands:
+To specify the path of the library to the binary, the *LD_LIBRARY_PATH* must be overridden.
+To do so, type the following commands:
 
 ```
 $> export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
-$> ./minilibc-asm_test
-```
-
-On Max OS X, it will look like below:
-
-```
-$> export DYLD_LIBRARY_PATH=.:$DYLD_LIBRARY_PATH
 $> ./minilibc-asm_test
 ```
 
