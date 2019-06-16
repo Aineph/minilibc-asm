@@ -36,7 +36,7 @@ _strncmp_check:
 	inc rcx
 	jmp _strncmp_check
 
-	;; Ends the function
+	;; Ends the function.
 _strncmp_end:
 	sub r10b, r11b
 	movsx rax, r10b

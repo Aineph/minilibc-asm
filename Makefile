@@ -56,7 +56,13 @@ SRCS		= src/strlen.S		\
 		  src/strcpy.S		\
 		  src/strncpy.S		\
 		  src/strcat.S		\
-		  src/strncat.S
+		  src/strncat.S		\
+		  src/strrchr.S		\
+		  src/index.S		\
+		  src/memcmp.S		\
+		  src/memchr.S		\
+		  src/memrchr.S		\
+		  src/strspn.S
 
 OBJS		= $(SRCS:.S=.o)
 

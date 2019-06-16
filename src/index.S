@@ -1,6 +1,6 @@
 ;;;
 ;;; Created by Nicolas Fez for minilibc-asm.
-;;; Started on 10/06/2019.
+;;; Started on 16/06/2019.
 ;;;
 
 [BITS 64]
@@ -12,30 +12,30 @@ section .text
 ;;; @param rsi: The character to search in the string.
 ;;; @return rax: The address of the first occurence of the given character in the string.
 
-global strchr
+global index
 
 	;; Initializes the function.
-strchr:
+index:
 	push rbp
 	mov rbp, rsp
 	xor rax, rax
 	push rdi
 
 	;; Searches the character within the string.
-_strchr_search:
+_index_search:
 	cmp [rdi], sil
-	je _strchr_found
+	je _index_found
 	cmp byte [rdi], 0
-	je _strchr_end
+	je _index_end
 	inc rdi
-	jmp _strchr_search
+	jmp _index_search
 
 	;; Stores the address of the character found.
-_strchr_found:
+_index_found:
 	mov rax, rdi
 
 	;; Ends the function.
-_strchr_end:
+_index_end:
 	pop rdi
 	mov rsp, rbp
 	pop rbp

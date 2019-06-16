@@ -1,6 +1,6 @@
 ;;;
 ;;; Created by Nicolas Fez for minilibc-asm.
-;;; Started on 12/06/2019.
+;;; Started on 16/06/2019.
 ;;;
 
 [BITS 64]
@@ -12,34 +12,34 @@ section .text
 ;;; @param rsi: The character to search in the string.
 ;;; @return rax: The address of the last occurence of the given character in the string.
 	
-global rindex
+global strrchr
 
 	;; Initializes the function.
-rindex:
+strrchr:
 	push rbp
 	mov rbp, rsp
 	xor rax, rax
 	push rdi
 
 	;; Searches the character within the string.
-_rindex_search:
+_strrchr_search:
 	cmp [rdi], sil
-	je _rindex_assign
+	je _strrchr_assign
 
 	;; Increments the index and searches again.
-_rindex_continue:
+_strrchr_continue:
 	cmp byte [rdi], 0
-	je _rindex_end
+	je _strrchr_end
 	inc rdi
-	jmp _rindex_search
+	jmp _strrchr_search
 
 	;; Stores the current position in the return value.
-_rindex_assign:
+_strrchr_assign:
 	mov rax, rdi
-	jmp _rindex_continue
+	jmp _strrchr_continue
 
 	;; Ends the function.
-_rindex_end:
+_strrchr_end:
 	pop rdi
 	mov rsp, rbp
 	pop rbp

@@ -19,6 +19,12 @@ The following functions are implemented:
 * strncpy
 * strcat
 * strncat
+* strrchr
+* index
+* memcmp
+* memchr
+* memrchr
+* strspn
 
 ## Build system
 

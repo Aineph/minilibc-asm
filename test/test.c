@@ -3,6 +3,8 @@
  * Started on 10/06/2019.
  */
 
+#define _GNU_SOURCE
+
 #include <stdio.h>
 #include <string.h>
 
@@ -12,6 +14,8 @@ int main()
 
     printf("%ld\n", strlen(str));
     printf("%s\n", strchr(str, 'W'));
+    printf("%s\n", memchr(str, 'W', 11));
+    printf("%s\n", index(str, 'W'));
     memset(str, '0', 5);
     printf("%s\n", str);
     memcpy(str, "Salut Monde", 11);
@@ -22,12 +26,17 @@ int main()
     printf("%s\n", str);
     printf("%d\n", strncmp(str, "Salut Monde", 7));
     printf("%d\n", strncmp(str, "Salut Monde", 3));
+    printf("%d\n", memcmp(str, "Salut Monde", 7));
+    printf("%d\n", memcmp(str, "Salut Monde", 3));
     printf("%d\n", strcasecmp(str, "SAlSaLuT Me"));
     printf("%d\n", strcasecmp(str, "SAlSaLit Me"));
     printf("%s\n", rindex(str, 'l'));
+    printf("%s\n", memrchr(str, 'l', 11));
+    printf("%s\n", strrchr(str, 'l'));
     printf("%s\n", strstr(str, "ut M"));
     printf("%s\n", strpbrk(str, "uma"));
     printf("%ld\n", strcspn(str, "me "));
+    printf("%ld\n", strspn(str, "Sau"));
     printf("%s\n", str);
     printf("%s\n", strcpy(str, "Hello World"));
     printf("%s\n", strncpy(str, "Salut", 6));
