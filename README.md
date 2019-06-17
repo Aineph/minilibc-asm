@@ -21,7 +21,6 @@ The following functions are implemented:
 * strncat
 * strrchr
 * index
-* memcmp
 * memchr
 * memrchr
 * strspn

@@ -26,8 +26,6 @@ int main()
     printf("%s\n", str);
     printf("%d\n", strncmp(str, "Salut Monde", 7));
     printf("%d\n", strncmp(str, "Salut Monde", 3));
-    printf("%d\n", memcmp(str, "Salut Monde", 7));
-    printf("%d\n", memcmp(str, "Salut Monde", 3));
     printf("%d\n", strcasecmp(str, "SAlSaLuT Me"));
     printf("%d\n", strcasecmp(str, "SAlSaLit Me"));
     printf("%s\n", rindex(str, 'l'));

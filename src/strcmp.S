@@ -26,7 +26,7 @@ _strcmp_check:
 	mov r11b, [rsi + rcx]
 	cmp r10b, r11b
 	jne _strcmp_end
-	cmp byte r10b, 0
+	cmp r10b, 0
 	je _strcmp_end
 	inc rcx
 	jmp _strcmp_check

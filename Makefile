@@ -59,7 +59,6 @@ SRCS		= src/strlen.S		\
 		  src/strncat.S		\
 		  src/strrchr.S		\
 		  src/index.S		\
-		  src/memcmp.S		\
 		  src/memchr.S		\
 		  src/memrchr.S		\
 		  src/strspn.S

@@ -23,49 +23,39 @@ strcasecmp:
 	;; Checks the content of the strings.
 _strcasecmp_check:
 	mov r10b, [rdi + rcx]
+	cmp r10b, 65
+	jl _strcasecmp_skip_first
+	cmp r10b, 90
+	jg _strcasecmp_skip_first
+	add r10b, 32
+
+	;; Continues the check without modifying the character of the first string.
+_strcasecmp_skip_first:
 	mov r11b, [rsi + rcx]
-	xor r12b, r12b
+	cmp r11b, 65
+	jl _strcasecmp_skip_second
+	cmp r11b, 90
+	jg _strcasecmp_skip_second
+	add r11b, 32
+
+	;; Continues the check without modifying the character of the second string.
+_strcasecmp_skip_second:
 	cmp r10b, r11b
-	jne _strcasecmp_check_case
+	jne _strcasecmp_end
 	cmp r10b, 0
 	je _strcasecmp_end
+	inc rcx
+	jmp _strcasecmp_check
 
 	;; Increments the index and checks again.
 _strcasecmp_continue:
 	inc rcx
 	jmp _strcasecmp_check
 
-	;; Checks if the two characters have different cases.
-_strcasecmp_check_case:
-	mov r12b, r10b
-	sub r12b, r11b
-	cmp r12b, 32
-	je _strcasecmp_check_lowercase
-	cmp r12b, -32
-	je _strcasecmp_check_uppercase
-	jmp _strcasecmp_end
-
-	;; Checks if the character is a lowercase character.
-_strcasecmp_check_lowercase:
-	cmp r10b, 97
-	jl _strcasecmp_end
-	cmp r10b, 122
-	jg _strcasecmp_end
-	mov r12b, 0
-	jmp _strcasecmp_continue
-
-	;; Checks if the character is an uppercase character.
-_strcasecmp_check_uppercase:
-	cmp r10b, 65
-	jl _strcasecmp_end
-	cmp r10b, 90
-	jg _strcasecmp_end
-	mov r12b, 0
-	jmp _strcasecmp_continue
-
 	;; Ends the function.
 _strcasecmp_end:
-	movsx rax, r12b
+	sub r10b, r11b
+	movsx rax, r10b
 	mov rsp, rbp
 	pop rbp
 	ret
