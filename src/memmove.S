@@ -21,25 +21,27 @@ memmove:
 	push rbp
 	mov rbp, rsp
 	xor rcx, rcx
-	sub rsp, rdx
+	cmp rdi, rsi
+	jle _memmove_ascending
+	mov rcx, rdx
 
-	;; Saves the content of the source array on the space allocated on the stack.
-_memmove_save:
-	cmp rcx, rdx
-	jge _memmove_fill
-	mov r10b, [rsi + rcx]
-	mov [rsp + rcx], r10b
-	inc rcx
-	jmp _memmove_save
-
-	;; Fills the array with the values saved on the stack.
-_memmove_fill:
+	;; Performs a descending copy.
+_memmove_descending:
 	dec rcx
 	cmp rcx, 0
 	jl _memmove_end
-	mov r10b, [rsp + rcx]
+	mov r10b, [rsi + rcx]
 	mov [rdi + rcx], r10b
-	jmp _memmove_fill
+	jmp _memmove_descending
+
+	;; Performs an ascending copy.
+_memmove_ascending:
+	cmp rcx, rdx
+	jge _memmove_end
+	mov r10b, [rsi + rcx]
+	mov [rdi + rcx], r10b
+	inc rcx
+	jmp _memmove_ascending
 
 	;; Ends the function.
 _memmove_end:
