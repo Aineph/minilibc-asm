@@ -25,7 +25,7 @@ The following functions are implemented:
 * memrchr
 * strspn
 
-## Build system
+## Build System
 
 The project uses a Makefile in order to compile a shared library.
 You need the assembly compiler *nasm* and the GNU Compiler collection *gcc*.
@@ -39,6 +39,8 @@ $> make
 ```
 
 On a Linux system, the created library should be named "libmlc.so". On OS X, it should be named "libmlc.dylib".
+
+## User Manual
 
 Now that the library has been built, the *LD_PRELOAD* variable has to be overridden. On Mac OS X, the variables to
 override are named *DYLD_INSERT_LIBRARIES* and *DYLD_FORCE_FLAT_NAMESPACE*.
@@ -57,8 +59,12 @@ $> export DYLD_FORCE_FLAT_NAMESPACE=1
 ```
 
 Now every command typed in the terminal are linked to the library.
+Therefore you can test everything from simple commands like "ls" to complex programs
+such as "Chromium" or "VLC media player".
 
-In order to test the implemented functions, a file named "test.c" is available in the "test" subdirectory.
+## Custom Tests
+
+In order to test the implemented functions, a C file named "test.c" is available in the "test" subdirectory.
 To compile it on a linux environment, simply run the command:
 
 ```
