@@ -1,6 +1,8 @@
 # minilibc-asm
 An x86_64 assembly implementation of the most popular functions of the C standard library.
 
+![MinilibC Illustration](https://res.cloudinary.com/deexzd1vz/image/upload/v1689606081/minilibc_wndw2e.jpg "MinilibC Illustration")
+
 The following functions are implemented:
 
 * strlen
